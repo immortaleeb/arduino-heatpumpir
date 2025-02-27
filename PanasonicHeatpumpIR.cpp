@@ -74,7 +74,7 @@ void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t opera
 {
   // Sensible defaults for the heat pump mode
 
-  uint8_t operatingMode = PANASONIC_AIRCON2_TIMER_CNL;
+  uint8_t operatingMode = 0x00;
   uint8_t fanSpeed      = PANASONIC_AIRCON2_FAN_AUTO;
   uint8_t temperature   = 23;
   uint8_t swingV        = PANASONIC_AIRCON2_VS_UP;
@@ -238,6 +238,7 @@ void PanasonicHeatpumpIR::sendPanasonic(IRSender& IR, uint8_t operatingMode, uin
       break;
     case PANASONIC_JKE:
       panasonicTemplate[14] = temperature << 1;
+      panasonicTemplate[23] = 0x89;
       break;
     case PANASONIC_NKE:
       panasonicTemplate[14] = temperature << 1;
